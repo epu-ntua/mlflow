@@ -37,8 +37,8 @@ services:
             sleep 5;
             /usr/bin/mc config host add s3 http://s3:${MINIO_PORT_API} ${MINIO_ROOT_USER} ${MINIO_ROOT_PASSWORD} --api S3v4;
             [[ ! -z "`/usr/bin/mc ls s3 | grep challenge`" ]] || /usr/bin/mc mb s3/${BUCKET_NAME};
-            /usr/bin/mc policy download s3/${BUCKET_NAME};
-            /usr/bin/mc policy set public s3/${BUCKET_NAME};
+            /usr/bin/mc anonymous policy download s3/${BUCKET_NAME};
+            /usr/bin/mc anonymous policy set public s3/${BUCKET_NAME};
             exit 0;
             '
     pgdb:
