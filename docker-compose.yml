@@ -31,7 +31,7 @@ services:
             - s3    
         environment:
             MINIO_ROOT_USER: ${MINIO_ROOT_USER}
-            MINIO_SECRET__KEY: ${MINIO_ROOT_PASSWORD}
+            MINIO_SECRET_KEY: ${MINIO_ROOT_PASSWORD}
         entrypoint: >
             /bin/sh -c '
             sleep 5;
