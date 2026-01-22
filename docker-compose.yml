@@ -28,7 +28,7 @@ services:
             timeout: 10s
             retries: 3
         networks:
-            - nginxproxy_energyguard_net
+            - keycloak_net
 
     create_bucket:
         image: minio/mc:latest
@@ -52,7 +52,7 @@ services:
             exit 0;
             '
         networks:
-            - nginxproxy_energyguard_net
+            - keycloak_net
 
     pgdb:
         container_name: pgdb
@@ -71,7 +71,7 @@ services:
             POSTGRES_DATABASE: ${POSTGRES_DATABASE}
             PGDATA: /var/lib/postgresql/data/pgdata
         networks:
-            - nginxproxy_energyguard_net
+            - keycloak_net
 
     mlflow_server:
         restart: always
@@ -93,7 +93,7 @@ services:
             - s3
             - pgdb
         networks:
-            - nginxproxy_energyguard_net
+            - keycloak_net
         command: bash -c 
             "mlflow server --serve-artifacts --backend-store-uri postgresql+psycopg2://${POSTGRES_USER}:${POSTGRES_PASSWORD}@pgdb:5432/${POSTGRES_DATABASE} --host 0.0.0.0 --artifacts-destination s3://${BUCKET_NAME}/ --allowed-hosts *"
 
@@ -101,5 +101,5 @@ services:
 # volumes are initiated locally in /var/lib/docker/volumes
 
 networks:
-    nginxproxy_energyguard_net:
+    keycloak_net:
         external: true    
