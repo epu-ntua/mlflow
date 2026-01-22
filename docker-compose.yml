@@ -90,7 +90,7 @@ services:
         networks:
             - keycloak_net
         command: bash -c 
-            "mlflow server --backend-store-uri postgresql+psycopg2://${POSTGRES_USER}:${POSTGRES_PASSWORD}@pgdb:5432/${POSTGRES_DATABASE} --host 0.0.0.0 --default-artifact-root s3://${BUCKET_NAME}/"
+            "mlflow server --serve-artifacts --backend-store-uri postgresql+psycopg2://${POSTGRES_USER}:${POSTGRES_PASSWORD}@pgdb:5432/${POSTGRES_DATABASE} --host 0.0.0.0 --artifacts-destination s3://${BUCKET_NAME}/"
 
 
 # volumes are initiated locally in /var/lib/docker/volumes
