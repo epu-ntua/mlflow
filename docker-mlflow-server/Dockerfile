@@ -1,10 +1,13 @@
-FROM python:3.12-rc-slim-buster
+FROM python:3.12-slim-bookworm
 COPY . /opt/app
 
 WORKDIR /opt/app
 
 RUN set -xe && \
     apt-get update 
+
+RUN python -m pip install --upgrade pip \
+ && python -m pip install --no-cache-dir "setuptools==70.*" wheel
 
 RUN apt-get install -y apt-utils
 
